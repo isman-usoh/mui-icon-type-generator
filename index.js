@@ -3,16 +3,14 @@ var request = require('request');
 
 var iconFileUrl = "https://raw.githubusercontent.com/callemall/material-ui/master/src/svg-icons/index.js"
 var destFileName = process.argv.slice(2)[0] || "svg-icons.d.ts";
-var header = `
-// Type definitions for material-ui v0.15.2
+var header = `// Type definitions for material-ui v0.15.2
 // Project: https://github.com/callemall/material-ui
-// Definitions by: "Isman Usoh <https://github.com/isman-usoh>"
+// Definitions by: Isman Usoh <https://github.com/isman-usoh>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-// Generator by: https://github.com/isman-usoh/mui-icon-type-generator
 
 ///<reference path='material-ui.d.ts' />
 
+// Generator by: https://github.com/isman-usoh/mui-icon-type-generator
 `;
 
 
@@ -49,12 +47,14 @@ declare module 'material-ui/svg-icons/${modulePath}' {
 
         declareModuleOuts.push(declareModule);
         indexExportOut.push(indexExport);
+        console.log(modulePath);
     });
     indexExportOut.splice(0, 0, "declare module 'material-ui/svg-icons' {\n");
     indexExportOut.push("}");
     
     fs.writeFileSync(destFileName, header);
+    fs.appendFileSync(destFileName, "// Total: "+declareModuleOuts.length+"\n\n");
     fs.appendFileSync(destFileName, indexExportOut.join(''));
     fs.appendFileSync(destFileName, declareModuleOuts.join(''));
-    console.log("successful:",destFileName);
+    console.log("Total:",declareModuleOuts.length);
 }
