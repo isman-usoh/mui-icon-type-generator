@@ -1,0 +1,11 @@
+{
+  "name": "mui-icon-type-generator",
+  "version": "1.0.0",
+  "description": "Generator type definitions for material-ui icons",
+  "scripts": {
+    "generator": "node index.js"
+  },
+  "keywords": ["Typescript", "Material-UI", "React", "Material", "Icon"],
+  "author": "Isman Usoh",
+  "license": "MIT"
+}
